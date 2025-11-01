@@ -1,0 +1,25 @@
+{
+  "name": "little-api-rest-midudev",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "cors": "2.8.5",
+    "express": "5.1.0",
+    "zod": "4.1.12"
+  },
+  "devDependencies": {
+    "neostandard": "^0.12.2"
+  },
+  "eslintConfig": {
+    "extends": "neostandard"
+  }
+}

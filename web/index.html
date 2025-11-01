@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PROBAR API REST</title>
+    <style>
+        article {
+            border: 1px solid #333;
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+        img {
+            max-width: 200px;
+            height: auto;
+        }
+    </style>
+    <script type="module">
+        fetch('http://localhost:1234/movies')
+            .then( res => res.json())
+            .then( data => {
+                const html = data.map( movie => {
+                    return `
+                        <article data-id="${movie.id}">
+                            <h2>${movie.title}</h2>
+                            <p>Año: ${movie.year}</p>
+                            <p>Director: ${movie.director}</p>
+                            <p>Duración: ${movie.duration} minutos</p>
+                            <p>Género: ${movie.genre.join(', ')}</p>
+                            <p>Calificación: ${movie.rate}</p>
+                            <img src="${movie.poster}" alt="Poster de ${movie.title}" />
+                            <button class="delete-movie">Eliminar película</button>
+                        </article>
+                    `
+                }).join(' ')
+
+                document.querySelector('main').innerHTML += html;
+
+                document.addEventListener('click', e => {
+                    if(e.target.matches('button')) {
+                        const article = e.target.closest('article');
+                        const movieId = article.getAttribute('data-id');
+
+                        fetch(`http://localhost:1234/movies/${movieId}`, {
+                            method: 'DELETE'
+                        })
+                        .then( res => {
+                            if(res.ok) {
+                                article.remove(); // Remove sirve para eliminar un nodo del DOM
+
+                            }
+                        })                      
+                    }
+                })
+            })
+    </script>
+</head>
+<body>
+    <main></main>
+</body>
+</html>
