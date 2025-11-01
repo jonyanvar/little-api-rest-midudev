@@ -1,6 +1,6 @@
 const crypto  = require('node:crypto');
 const express = require('express');
-const cros = require('cors');
+const cors = require('cors');
 const movies = require('./movies.json');
 const movieSchema = require('./schemas/movies.js');
 const { id } = require('zod/v4/locales');
